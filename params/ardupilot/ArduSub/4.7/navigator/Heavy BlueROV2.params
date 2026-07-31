@@ -1,4 +1,5 @@
 %include "../../hardware/boards/navigator.params"
+%include "../../hardware/tmp119.params"
 %include "../base.params"
 %include "../heavy.params"
 
@@ -15,8 +16,3 @@ SERVO13_FUNCTION: 181, // lights 1
 SERVO14_FUNCTION: 182, // lights 2
 SERVO15_FUNCTION: 0, // unused
 SERVO16_FUNCTION: 7, // mount pitch
-TEMP2_TYPE: 10, // TMP TMP119
-TEMP2_BUS: 6, // i2c-6
-TEMP2_SRC: 3, // Battery index
-TEMP2_SRC_ID: 1, // Battery 1
-TEMP_LOG: 1, // log all temperature instances to binlogs
