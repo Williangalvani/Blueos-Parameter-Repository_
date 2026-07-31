@@ -1,2 +1,2 @@
-%include "../navigator/Standard BlueROV2.params"
 %include "../base.params"
+%include "../navigator/Standard BlueROV2.params"
