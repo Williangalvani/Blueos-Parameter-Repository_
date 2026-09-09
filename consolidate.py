@@ -94,9 +94,29 @@ for dirpath, dirnames, filenames in os.walk(root_directory):
             file_params = parse_file(file_path)
             json_data[relative_path] = file_params
 
+def format_param_value(value):
+    if isinstance(value, float) and value.is_integer():
+        return str(int(value))
+    if isinstance(value, float):
+        return format(value, '.6f').rstrip('0').rstrip('.')
+    return str(value)
+
+
+def write_param_file(path, params):
+    with open(path, 'w') as param_file:
+        for name in sorted(params):
+            param_file.write(f"{name},{format_param_value(params[name])}\n")
+
+
 # Save the json_data to a JSON file
 with open('params_v1.json', 'w') as json_file:
     json.dump(json_data, json_file, indent=4)
+
+# Write flattened Mission Planner .param files (includes already resolved)
+for relative_path, file_params in json_data.items():
+    param_path = os.path.splitext(os.path.join(root_directory, relative_path))[0] + '.param'
+    write_param_file(param_path, file_params)
+    print(f"Wrote {len(file_params)} parameters to {param_path}")
 
 
 # Now let's do scripts
